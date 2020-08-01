@@ -1,6 +1,7 @@
 import {combineReducers} from 'redux';
-import { createReducer,createAsyncReducer } from '../common/createReducer';
-import { keys as movieActionKeys } from './movieAction';
+import { createReducer,createAsyncReducer } from '../../../common/createReducer';
+import { keys as movieActionKeys } from '../action/movieAction';
+import movieModReducer from './movieModReducer';
 
 const movieModalReducer = createReducer({ isOpen: false }, {
 
@@ -24,7 +25,7 @@ const moviesSuccessReducer = (state, action) => {
 
 // gabungin reducer dari setiap reducer yang ada di createRedujer.js
 const movieBrowserReducer = combineReducers({
-  movieModal: movieModalReducer,
+  movieModal: movieModReducer,
   topMovies: createAsyncReducer(movieActionKeys.GET_TOP_MOVIES, {
     [`${movieActionKeys.GET_TOP_MOVIES}_SUCCESS`]: moviesSuccessReducer
   }),

@@ -2,10 +2,11 @@ import React from 'react';
 import {Container, Row, Col} from 'react-bootstrap';
 import {AppBar} from 'material-ui';
 import {connect} from 'react-redux';
-import * as movieActions from '../movieAction';
-import * as movieHelpers from '../movieDispatch';
+import * as movieActions from '../redux/action/movieAction';
+import * as movieHelpers from '../redux/movieDispatch';
 import MovieList from './movieListComponent';
 import * as scroll from '../../common/scroll';
+import MovieModal from './modalContainer';
 
 class MovieBrowser extends React.Component {
  // set buat munculin data selalu page 1 setiap awal run
@@ -58,6 +59,7 @@ class MovieBrowser extends React.Component {
               <MovieList movies={movies} isLoading={topMovies.isLoading} />
           </Row>
         </Container>
+        <MovieModal />
       </div>
     );
   }

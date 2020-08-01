@@ -1,5 +1,5 @@
-import {createAsyncActionCreator} from '../common/createReducer';
-import * as movieService from './movieServices';
+import {createAsyncActionCreator} from '../../../common/createReducer';
+import * as movieService from '../../movieServices';
 
 export const keys = {
   'GET_TOP_MOVIES': 'GET_TOP_MOVIES',
