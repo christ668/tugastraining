@@ -1,12 +1,19 @@
 import React from 'react';
 import {Container, Row, Col} from 'react-bootstrap';
 import {AppBar} from 'material-ui';
+import Button from '@material-ui/core/Button';
 import {connect} from 'react-redux';
 import * as movieActions from '../redux/action/movieAction';
 import * as movieHelpers from '../redux/movieDispatch';
 import MovieList from './movieListComponent';
 import * as scroll from '../../common/scroll';
 import MovieModal from './modalContainer';
+import history from '../../../history';
+
+const style = {
+  margin: 12,
+  flex: 1
+};
 
 class MovieBrowser extends React.Component {
  // set buat munculin data selalu page 1 setiap awal run
@@ -42,7 +49,6 @@ class MovieBrowser extends React.Component {
     }
   }
 
-
   render() {
 
     const {topMovies} = this.props;
@@ -53,7 +59,9 @@ class MovieBrowser extends React.Component {
         <AppBar title='Movie Browser' />
         <Container>
           <Row>
-            <p>buat modul seach (kalo sempet)</p>
+          <Button variant="contained" color="primary" style={style}  onClick={() => history.push('/review')}>
+               review your movie
+          </Button>
           </Row>
           <Row>
               <MovieList movies={movies} isLoading={topMovies.isLoading} />
