@@ -5,13 +5,42 @@ import {connect} from 'react-redux';
 import * as movieActions from '../movieAction';
 import * as movieHelpers from '../movieDispatch';
 import MovieList from './movieListComponent';
+import * as scroll from '../../common/scroll';
 
 class MovieBrowser extends React.Component {
+ // set buat munculin data selalu page 1 setiap awal run
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentPage: 1
+    };
+    // biar bisa akses props dari moviebrowser
+    this.handleScroll = this.handleScroll.bind(this);
+  }
 
 
   componentDidMount() {
-    this.props.getTopMovies(1);
+    window.onscroll = this.handleScroll;
+    this.props.getTopMovies(this.state.currentPage);
   }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.handleScroll);
+  }
+
+  // jika posisi scroll bar sudah 90% dari tinggi client maka tampilkan data page berikutnya
+  handleScroll() {
+    const {topMovies} = this.props;
+    if (!topMovies.isLoading) {
+      let percentageScrolled = scroll.getScrollDownPercentage(window);
+      if (percentageScrolled > .9) {
+        const nextPage = this.state.currentPage + 1;
+        this.props.getTopMovies(nextPage);
+        this.setState({currentPage: nextPage});
+      }
+    }
+  }
+
 
   render() {
 
